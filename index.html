@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html style="position: relative; min-height: 100%; padding-bottom: 80px; box-sizing: border-box;">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/fontawesome-free-5.15.1-web/all.min.css">
+    <link rel="stylesheet" href="./css/application.css">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./img/favicon.ico">
+    <!--[If lte IE 9]> 
+      <script src="./js/html5shiv.js"></script>
+      <script src="./js/respond.min.js"></script>
+    <![endif]-->
+    <title>JavaScript検索ツール</title>
+  </head>
+
+  <body>
+    <header id="top">
+      <nav class="navbar navbar-inverse navbar-static-top m-0 p-0">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./">
+              <span class="glyphicon glyphicon-search mr-2" aria-hidden="true"></span>JavaScript検索ツール
+            </a>
+          </div>
+          
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="./">
+                  <span class="glyphicon glyphicon-home mr-2" aria-hidden="true"></span>ホーム
+                </a>
+              </li>
+              <li>
+                <a href="./faq.html">
+                  <span class="glyphicon glyphicon-list-alt mr-2" aria-hidden="true"></span>ＦＡＱ
+                </a>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-new-window mr-2" aria-hidden="true"></span>リンク<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="">GitHubリポジトリ</a></li>
+                  <li><a href="" target="_blank" rel="noopener noreferrer">制作者のブログ</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="border border-bottom py-2 bg-light">
+        <div class="container">
+          <h1 class="h4 font-weight-bold mb-3">
+            <span class="glyphicon glyphicon-search mr-1" aria-hidden="true"></span>JavaScript検索ツールへようこそ
+          </h1>
+          <div class="my-1">JavaScript検索ツールは、<strong>JavaScript(jQuery)とCSVのみで動作する全文検索ツール</strong>です。</div>
+          <div class="my-1">サーバー側の処理は一切ないため、静的コンテンツを配信するだけのWEBサーバー上で動作可能です。</div>
+          <div class="my-1">動作確認済みのブラウザは、Google Chrome、FireFox、InternetExplorer（9以降）です。</div>
+          <div class="my-1">また、index.htmlをブラウザで開くだけでも動作します（※）ので、当ツールを共有フォルダに置いて、index.htmlのファイルパスを共有すれば検索ツールとして動作します。</div>
+          <div class="my-1">当該ツールの詳しい仕様については、<a href="./faq.html">FAQ</a>をご確認下さい。</div>
+
+          <div class="small text-muted mt-3">※ ブラウザによっては、CORSエラーにより動作しない可能性があります。</div>
+
+          <div class="panel panel-default mt-3">
+            <ul class="list-group list-group-flush panel-body py-0 small notice" id="notice">
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-4">
+        <div class="container">
+          <table class="search-form" cellpadding="5">
+            <tr>
+              <td class="w-15 py-2">
+                <label for="primaryKey" class="col-form-label">
+                  主キーとなる番号
+                </label>
+              </td>
+              <td class="w-85 py-2">
+                <input type="text" class="form-control" id="primaryKey" placeholder="検索したい番号を入力してください" />
+              </td>
+            </tr>
+            <tr>
+              <td class="w-15 py-2">
+                <label for="freeWord" class="col-form-label">
+                  フリーワード
+                  <a href="#" data-toggle="modal" data-target="#howToFreeWordsModal"><span class="glyphicon glyphicon-question-sign ml-1" aria-hidden="true"></span></a>
+                  
+                  <!-- モーダル・ダイアログ -->
+                  <div class="modal fade in" id="howToFreeWordsModal" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                          <h4 class="h4">
+                            <span class="glyphicon glyphicon-info-sign mr-1" aria-hidden="true"></span>フリーワードを指定した検索方法
+                          </h4>
+                        </div>
+                        <div class="modal-body mx-3">
+                          <div class="my-1">複数のフリーワードを指定して検索したい場合は、以下のように<u>半角カンマ（,）で区切って入力してください。</u></div>
+                          <div class="my-3">
+                            <table cellpadding="5" style="table-layout: fixed; width: 100%;">
+                              <tr>
+                                <td style="width: 30%">
+                                  <label for="sample_free_word" class="col-form-label">フリーワード<a href="#"><i class="fas fa-question-circle ml-1"></i></a></label>
+                                </td>
+                                <td style="width: 70%;">
+                                  <input type="text" class="form-control" id="sample_free_word" value="サンプル,さんぷる,sample" readonly>
+                                </td>
+                              </tr>
+                            </table>
+                          </div>
+                          <div class="my-1">また、フリーワード検索をする際に<u>「改行」や「スペース」を気にする必要はありません。</u></div>
+                          <div class="my-1">検索対象の起案書から「改行」と「スペース」を削除した文字列に、指定されたフリーワードが含まれているか否かで検索を行います。</div>        
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </td>
+              <td class="w-85 py-2">
+                <input type="text" class="form-control" id="freeWord" placeholder="検索したいフリーワードを入力してください" />
+              </td>
+            </tr>
+          </table>
+          <div class="my-3">
+            <button class="btn btn-secondary w-100" onclick="onSearch();" id="searchButton"><span class="glyphicon glyphicon-search mr-2" aria-hidden="true"></span>検索する</button>
+          </div>
+          <div class="text-center display-none" id="loadingStart">
+            <div>検索中・・・</div>
+          </div>
+          <div class="text-center display-none" id="loadingEnd">
+          </div>
+          <div class="display-none mt-5" id="result">
+            <table class="table table-bordered table-w-100">
+              <thead class="resul-table-header">
+                <tr>
+                  <th class="w-15">主キーとなる番号</th>
+                  <th class="w-15">日付</th>
+                  <th class="w-70">ドキュメント</th>
+                </tr>
+              </thead>
+              <tbody id="resultTable">
+            </table>
+          </div>
+        </div>
+        <div id="pageTop"><a href="#"></a></div>
+      </section>
+    </main>
+
+    <footer class="border-top bg-light">
+      <div class="container pt-4" style="padding-top: 2rem;">
+        <div class="row py-1">
+          <div class="col-12">
+            <div class="text-center">
+              <a href="./" class="text-secondary">
+                <span class="glyphicon glyphicon-home mr-1" aria-hidden="true"></span>ホーム
+              </a>
+              |
+              <a href="./faq.html" class="text-secondary">
+                <span class="glyphicon glyphicon-list-alt mr-1" aria-hidden="true"></span>ＦＡＱ
+              </a>
+              |
+              <span class="dropup">
+                <a class="dropdown-toggle text-secondary" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-new-window mr-2" aria-hidden="true"></span>リンク<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="" target="_blank" rel="noopener noreferrer">GitHubリポジトリ</a></li>
+                  <li><a href="" target="_blank" rel="noopener noreferrer">制作者のブログ</a></li>
+                </ul>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-12">
+            <div class="text-center">
+              <p class="text-muted my-0">Copyright (C) 2021- JavaScript検索ツール All Rights Reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 業務用PCのイントラサーバでは、強制的にie9モードで開かれる仕様 -->
+    <!-- ie9に対応するため、jqueryは1系を利用することとする -->
+    <!-- <script src="./js/jquery-3.5.1.min.js"></script> -->
+    <!-- <script src="./js/jquery-2.2.4.min.js"></script> -->
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.csv.min.js"></script>
+    <script src="./js/application.js"></script>
+
+  </body>
+</html>

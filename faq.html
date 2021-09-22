@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html style="position: relative; min-height: 100%; padding-bottom: 80px; box-sizing: border-box;">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/application.css">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./img/favicon.ico">
+    <!--[If lte IE 9]> 
+      <script src="./js/html5shiv.js"></script>
+      <script src="./js/respond.min.js"></script>
+    <![endif]-->
+    <title>JavaScript検索ツール</title>
+  </head>
+
+  <body>
+    <header id="top">
+      <nav class="navbar navbar-inverse navbar-static-top m-0 p-0">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span class="sr-only"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="./">
+              <span class="glyphicon glyphicon-search mr-2" aria-hidden="true"></span>JavaScript検索ツール
+            </a>
+          </div>
+          
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="./">
+                  <span class="glyphicon glyphicon-home mr-2" aria-hidden="true"></span>ホーム
+                </a>
+              </li>
+              <li>
+                <a href="./faq.html">
+                  <span class="glyphicon glyphicon-list-alt mr-2" aria-hidden="true"></span>ＦＡＱ
+                </a>
+              </li>
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-new-window mr-2" aria-hidden="true"></span>リンク<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="">GitHubリポジトリ</a></li>
+                  <li><a href="" target="_blank" rel="noopener noreferrer">制作者のブログ</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <div class="container mt-3 py-2">
+        <div class="mb-4">
+          <h1 class="h5 font-weight-bold mb-3"><i class="fas fa-file-alt mr-1"></i>ＦＡＱ（よくあるご質問）</h1>
+          <div class="text my-1">JavaScript検索ツールについて、仕様などを掲載しています。実際に使用する場合は、当ページは書き換えてご利用ください。</div>
+        </div>
+        <div class="panel panel-default mb-4">
+          <div class="panel-heading">
+            Ｑ：検索ロジックについて、仕様の概要を知りたい。
+          </div>
+          <div class="panel-body">
+            <div>
+              Ａ：処理の概要としては、以下のとおりです。
+              <ol class="ml-3">
+                <li>jQueryのajaxで./data/documents.csvを読み取る</li>
+                <li>jquery-csvで読み取った配列から１レコードずつ取り出す</li>
+                <li>検索対象の要素に、ユーザーが指定した主キーとなる番号又はフリーワードが含まれているか判断</li>
+                <li>含まれていれば、検索結果としてDOMに挿入</li>
+              </ol>
+              データを格納しているCSVファイルのカラムは、
+              <ul class="ml-3">
+                <li>主キーとなる番号</li>
+                <li>日付（YYYYMMDD）</li>
+                <li>全文検索対象となるドキュメント</li>
+              </ul>
+              という形式です。<br>
+            </div>
+          </div>
+        </div> 
+        <div class="panel panel-default mb-4">
+          <div class="panel-heading">
+            Ｑ：JavaScriptのソースコード（./js/application.js）を確認すると書き方が古いのではないか？
+          </div>
+          <div class="panel-body">
+            <div>Ａ：当該ツールは、InternetExplorer 9で動作するように開発したため、ES2015以降の仕様は利用していません。なので、constとletでの変数の宣言やアロー関数は使用していません。</div>
+          </div>
+        </div>        
+        <div class="panel panel-default mb-4">
+          <div class="panel-heading">
+            Ｑ：利用しているライブラリーを教えてほしい。
+          </div>
+          <div class="panel-body">
+            <div>Ａ：利用しているライブラリーは、<a href="https://getbootstrap.com/docs/3.3/">Bootstrap 3</a>と<a href="https://jquery.com/">jQuery 1.12.4</a>、<a href="https://github.com/evanplaice/jquery-csv/">jquery-csv</a>、<a href="https://github.com/aFarkas/html5shiv">html5shiv.js</a>、<a href="https://github.com/scottjehl/Respond">Respond.js</a>です。<br>BootstrapとjQueryのバージョンが古いのは、InternetExplorer 9で動くようにするためです。後半の２つは、InternetExplorer 9で非対応のHTML5の要素を表示するために利用しています。 <br>Bootstrap 3のスタイルが少し古臭いので、Bootstrap4のスタイルシートからボタンなどのスタイルを拝借しています。</div>
+          </div>
+        </div>
+        <div class="panel panel-default mb-4">
+          <div class="panel-heading">
+            Ｑ：トップページのお知らせ欄を更新したい。
+          </div>
+          <div class="panel-body">
+            <div>Ａ：お知らせ欄のコンテンツは、CSVに外出ししています。./data/notice.csvにレコードを追加することで、更新することができます。</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="border-top bg-light">
+      <div class="container pt-4" style="padding-top: 2rem;">
+        <div class="row py-1">
+          <div class="col-12">
+            <div class="text-center">
+              <a href="./" class="text-secondary">
+                <span class="glyphicon glyphicon-home mr-1" aria-hidden="true"></span>ホーム
+              </a>
+              |
+              <a href="./faq.html" class="text-secondary">
+                <span class="glyphicon glyphicon-list-alt mr-1" aria-hidden="true"></span>ＦＡＱ
+              </a>
+              |
+              <span class="dropup">
+                <a class="dropdown-toggle text-secondary" data-toggle="dropdown" href="#">
+                  <span class="glyphicon glyphicon-new-window mr-2" aria-hidden="true"></span>リンク<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="" target="_blank" rel="noopener noreferrer">GitHubリポジトリ</a></li>
+                  <li><a href="" target="_blank" rel="noopener noreferrer">制作者のブログ</a></li>
+                </ul>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-12">
+            <div class="text-center">
+              <p class="text-muted my-0">Copyright (C) 2021- JavaScript検索ツール All Rights Reserved.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- 業務用PCのイントラサーバでは、強制的にie9モードで開かれる仕様 -->
+    <!-- ie9に対応するため、jqueryは1系を利用することとする -->
+    <!-- <script src="./js/jquery-3.5.1.min.js"></script> -->
+    <!-- <script src="./js/jquery-2.2.4.min.js"></script> -->
+    <script src="./js/jquery-1.12.4.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery.csv.min.js"></script>
+    <script src="./js/application.js"></script>
+
+  </body>
+</html>
